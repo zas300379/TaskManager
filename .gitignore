@@ -1,0 +1,22 @@
+# Gauge - metadata dir
+.gauge
+
+# Gauge - log files dir
+logs
+
+# Gauge - reports dir
+reports
+
+# Gauge - python compiled files
+*.pyc
+
+
+/.env
+/venv/
+/.idea/
+.ipynb_checkpoints/
+*.log
+*.pkl
+__pycache__/
+*.pyc
+
