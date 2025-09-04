@@ -18,5 +18,5 @@ reports
 *.log
 *.pkl
 __pycache__/
-*.pyc
-
+.vscode
+get_structure.py

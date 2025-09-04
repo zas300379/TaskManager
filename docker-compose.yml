@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build: .  # ← Использует CMD из Dockerfile (uvicorn)
+    ports:
+      - "8000:8000"  # ← Проброс порта
+    env_file: .env.docker  # ← Переменные для приложения
+    depends_on:
+      db:
+        condition: service_healthy  # ← Ждем готовности БД
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=${DB_USER}  # ← Подстановка из .env.docker
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # ← Монтирование тома
+    healthcheck: # ← Проверка готовности БД
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  postgres_data:  # ← Объявление тома для хранения данных БД
+  
