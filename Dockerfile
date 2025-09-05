@@ -26,13 +26,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копируем весь проект
 COPY . .
 
-# Создаем пользователя для безопасности и копируем плагины
-#RUN useradd -m -u 1000 user && \
-#    chown -R user:user /app && \
-#    mkdir -p /home/user/.gauge && \
-#    cp -r /root/.gauge/* /home/user/.gauge/ && \
-#    chown -R user:user /home/user/.gauge
-#USER user
 
 # Expose порт
 EXPOSE 8000
