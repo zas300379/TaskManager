@@ -23,9 +23,20 @@
 
 * I send a PUT request for task with id "created_task_id" with payload "{\"status\":\"INVALID_STATUS\"}"
 * the response status code should be "422"
+* the response should contain validation error for field "status"
 
 
 ## Update task with empty title
 
 * I send a PUT request for task with id "created_task_id" with payload "{\"title\":\"\"}"
 * the response status code should be "422"
+* the response should contain validation error for field "title"
+
+
+## Update task with wrong data types
+
+* I send a PUT request for task with id "created_task_id" with payload "{\"title\":123,\"description\":true,\"status\":[]}"
+* the response status code should be "422"
+* the response should contain validation error for field "title"
+* the response should contain validation error for field "description"
+* the response should contain validation error for field "status"

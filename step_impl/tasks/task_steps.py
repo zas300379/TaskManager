@@ -25,6 +25,38 @@ def send_post_request(endpoint, payload):
     data_store.suite["response"] = response
 
 
+@step("the response should contain validation error for field <field_name>")
+def check_validation_error(field_name):
+    """Проверяет что в ответе есть ошибка валидации для указанного поля"""
+    response = data_store.suite["response"]
+    response_data = response.json()
+
+    # Проверяем наличие ошибок валидации
+    assert "detail" in response_data, "No validation errors in response"
+
+    # Ищем ошибку для указанного поля
+    field_error = False
+    for error in response_data["detail"]:
+        if field_name in str(error.get("loc", [])):
+            field_error = True
+            print(f"Found validation error for {field_name}: {error.get('msg')}")
+            break
+
+    assert field_error, f"Validation error for field '{field_name}' not found"
+
+
+@step("the response should contain error message <message>")
+def check_error_message(message):
+    """Проверяет что в ответе содержится указанное сообщение об ошибке"""
+    response = data_store.suite["response"]
+    response_data = response.json()
+    error_text = json.dumps(response_data).lower()
+
+    assert message.lower() in error_text, (
+        f"Error message '{message}' not found in response: {error_text}"
+    )
+
+
 # -------------------------
 # GET /tasks/{id}
 # -------------------------
