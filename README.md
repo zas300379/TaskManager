@@ -13,7 +13,7 @@ REST API для управления задачами на FastAPI с PostgreSQL
 
 ```bash
 # 1. Клонирование репозитория
-git clone <your-repo-url>
+git clone https://github.com/zas300379/TaskManager.git
 cd TaskManager
 
 # 2. Запуск контейнеров
