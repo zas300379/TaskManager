@@ -11,3 +11,7 @@ Dockerfile
 .git/
 .gitignore
 .env
+/.gauge
+/logs
+/reports
+get_structure.py

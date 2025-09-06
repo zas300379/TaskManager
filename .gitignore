@@ -14,6 +14,7 @@ reports
 /.env
 /venv/
 /.idea/
+/.vscode
 .ipynb_checkpoints/
 *.log
 *.pkl
